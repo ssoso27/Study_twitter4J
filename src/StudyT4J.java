@@ -1,5 +1,6 @@
 import java.util.List;
 
+import twitter4j.DirectMessage;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -21,11 +22,19 @@ public class StudyT4J {
 		TwitterFactory tf = new TwitterFactory(cf.build());
 		twitter4j.Twitter twitter = tf.getInstance();
 		
-		// get username, status 		
-		List<Status> status = twitter.getHomeTimeline();
-		for (Status st : status)
+//		// get username, status 		
+//		List<Status> status = twitter.getHomeTimeline();
+//		for (Status st : status)
+//		{
+//			System.out.println(st.getUser().getName() + "\n" + st.getText() + "\n ---------------------");
+//		}
+		
+		// get dm
+		List<DirectMessage> directMessage = twitter.getDirectMessages();
+		for (DirectMessage dm : directMessage)
 		{
-			System.out.println(st.getUser().getName() + "----------" + st.getText());
+			System.out.println(dm.getSender().getName() + " ( @" + dm.getSenderScreenName() + " ) ");
+			System.out.println(dm.getText());
 		}
 	}
 }
