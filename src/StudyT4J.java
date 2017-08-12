@@ -22,24 +22,32 @@ public class StudyT4J {
 		TwitterFactory tf = new TwitterFactory(cf.build());
 		twitter4j.Twitter twitter = tf.getInstance();
 		
-//		// get username, status 		
+//		// get timeline 		
 //		List<Status> status = twitter.getHomeTimeline();
 //		for (Status st : status)
 //		{
 //			System.out.println(st.getUser().getName() + "\n" + st.getText() + "\n ---------------------");
 //		}
 		
-		// get dm
-		List<DirectMessage> directMessage = twitter.getDirectMessages();
-		for (DirectMessage dm : directMessage)
+		// get ¹ÞÀº dm
+		List<DirectMessage> receiveDM = twitter.getDirectMessages();
+		for (DirectMessage dm : receiveDM)
 		{
 			System.out.println(dm.getSender().getName() + " ( id :: " + dm.getId() + " ) ");
 			System.out.println(dm.getText());
-			
-//			System.out.println(dm.getRecipient().getName() + " ( @" + dm.getRecipientScreenName() + " ) ");
-//			System.out.println(dm.);
 		}
 		
-		DirectMessage testDM = twitter.sendDirectMessage("@sae_ssak_da", "¶š½ºÆ® µð¿¥");
+		System.out.println("=======================================");
+		
+		// get º¸³½ dm
+		List<DirectMessage> sentDM = twitter.getSentDirectMessages();
+		for (DirectMessage dm : sentDM)
+		{
+			System.out.println(dm.getSender().getName() + " ( id :: " + dm.getId() + " ) ");
+			System.out.println(dm.getText());
+		}
+		
+		// sent dm
+//		DirectMessage testDM = twitter.sendDirectMessage("@sae_ssak_da, "¶š½ºÆ® µð¿¥");
 	}
 }
