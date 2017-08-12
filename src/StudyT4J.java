@@ -33,8 +33,13 @@ public class StudyT4J {
 		List<DirectMessage> directMessage = twitter.getDirectMessages();
 		for (DirectMessage dm : directMessage)
 		{
-			System.out.println(dm.getSender().getName() + " ( @" + dm.getSenderScreenName() + " ) ");
+			System.out.println(dm.getSender().getName() + " ( id :: " + dm.getId() + " ) ");
 			System.out.println(dm.getText());
+			
+//			System.out.println(dm.getRecipient().getName() + " ( @" + dm.getRecipientScreenName() + " ) ");
+//			System.out.println(dm.);
 		}
+		
+		DirectMessage testDM = twitter.sendDirectMessage("@sae_ssak_da", "¶š½ºÆ® µð¿¥");
 	}
 }
