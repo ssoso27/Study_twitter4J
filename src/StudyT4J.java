@@ -18,10 +18,10 @@ public class StudyT4J {
 		// initialize my app
 		cf = new ConfigurationBuilder();
 		cf.setDebugEnabled(true)
-		.setOAuthConsumerKey("o2vVCGim4XNpVCOg6KH1N7E93")
-		.setOAuthConsumerSecret("D1UN8ayU0VhOw4QDyP3FCDFehNdjbPzhS0KZ5QQAM0WPpJ34Ac")
-		.setOAuthAccessToken("269166725-yG8lfZbqJKz3puBOHOAm8ggHvS7qERVlr1eXL80Z")
-		.setOAuthAccessTokenSecret("XANl5nJ5jF2UBOZWrnM7Ee3aMAW127MCm154qmy4qXGZf");
+		.setOAuthConsumerKey("key")
+		.setOAuthConsumerSecret("key")
+		.setOAuthAccessToken("key")
+		.setOAuthAccessTokenSecret("key");
 		
 		tf = new TwitterFactory(cf.build());
 		twitter = tf.getInstance();
@@ -42,8 +42,15 @@ public class StudyT4J {
 		
 		for (int i = dmCount - 1; i >= 0; i--)
 		{
-			r_id = receiveDM.get(r_index).getId();
-			s_id = sentDM.get(s_index).getId();
+			try
+			{
+				r_id = receiveDM.get(r_index).getId();
+				s_id = sentDM.get(s_index).getId();
+			}
+			catch(Exception e)
+			{
+				break;
+			}
 			
 			if (r_id > s_id)
 			{
