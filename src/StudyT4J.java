@@ -1,19 +1,21 @@
 import java.util.List;
 
 import twitter4j.DirectMessage;
+import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
 public class StudyT4J {
-	private final int dmCount = 20;
+	private final int dmCount = 40;
 	TwitterFactory tf;
 	twitter4j.Twitter twitter;
 	ConfigurationBuilder cf; 
 	
 	public StudyT4J()
 	{
+		// initialize my app
 		cf = new ConfigurationBuilder();
 		cf.setDebugEnabled(true)
 		.setOAuthConsumerKey("o2vVCGim4XNpVCOg6KH1N7E93")
@@ -25,10 +27,14 @@ public class StudyT4J {
 		twitter = tf.getInstance();
 	}
 	
+	// print my dm
 	public void showMyDM() throws TwitterException
 	{
-		List<DirectMessage> receiveDM = twitter.getDirectMessages();
-		List<DirectMessage> sentDM = twitter.getSentDirectMessages();
+		Paging paging = new Paging();
+		paging.setCount(40);
+		
+		List<DirectMessage> receiveDM = twitter.getDirectMessages(paging);
+		List<DirectMessage> sentDM = twitter.getSentDirectMessages(paging);
 		
 		int r_index = 0, s_index = 0; 
 		long r_id, s_id;
@@ -55,9 +61,21 @@ public class StudyT4J {
 				
 				s_index++;
 			}
+			else if (r_id == s_id)
+			{
+				dm = receiveDM.get(r_index);
+				System.out.println("[수신] " + dm.getSender().getName() + " ( @" + dm.getSenderScreenName() + " )");
+				System.out.println(dm.getText());
+				r_index++;
+				
+				dm = sentDM.get(s_index);
+				System.out.println("[송신] " + dm.getSender().getName() + " ( @" + dm.getSenderScreenName() + " )");
+				System.out.println(dm.getText());
+				s_index++;				
+			}
 			else
 			{
-				System.out.println("에러발생 : r_index : " + r_index + " s_index : " + s_index + " i : " + i);
+				System.out.println("error! : r_index : " + r_index + " s_index : " + s_index + " i : " + i);
 			}
 		}
 	}
